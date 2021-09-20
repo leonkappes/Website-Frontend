@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: leon-kappes-space-home-deployment-dev
+  namespace: leon-kappes-space
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: leon-kappes-space-home
+  template:
+    metadata:
+      labels:
+        app: leon-kappes-space-home
+    spec:
+      containers:
+      - name: site
+        image: registry.gitlab.com/lee-websites/frontend/home
+        imagePullPolicy: Always
+        ports:
+          - containerPort: 5000
+      imagePullSecrets:
+      - name: gitlab-auth
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: leon-kappes-space-home-service-dev
+  namespace: leon-kappes-space
+spec:
+  ports:
+   - name: http
+     port: 80
+     protocol: TCP
+     targetPort: 5000
+  selector:
+    app: leon-kappes-space-home
+
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: traefik
+  name: leon-kappes-space-home-ingress-dev
+  namespace: leon-kappes-space
+spec:
+  rules:
+  - host: develop.kappes.space
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: leon-kappes-space-home-service-dev
+          servicePort: 80

@@ -1,0 +1,40 @@
+{
+  "name": "frontend",
+  "version": "1.0.0",
+  "description": "Home Page and Portfolio",
+  "author": "Leon Kappes",
+  "private": true,
+  "scripts": {
+    "dev": "cross-env NODE_ENV=development nodemon server/index.js --watch server",
+    "build": "nuxt build",
+    "start": "cross-env NODE_ENV=production NUXT_PORT=5000 NUXT_HOST=0.0.0.0 node server/index.js",
+    "generate": "nuxt generate",
+    "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
+    "precommit": "npm run lint"
+  },
+  "dependencies": {
+    "@nuxtjs/pwa": "^3.3.5",
+    "cross-env": "^7.0.3",
+    "express": "^4.17.1",
+    "nuxt": "^2.15.3",
+    "particles.js": "^2.0.0",
+    "typewriter-effect": "^2.17.0"
+  },
+  "devDependencies": {
+    "@nuxtjs/eslint-config": "6.0.0",
+    "babel-eslint": "^8.2.1",
+    "eslint": "^7.22.0",
+    "eslint-config-prettier": "^8.1.0",
+    "eslint-config-standard": ">=16.0.2",
+    "eslint-loader": "^3.0.3",
+    "eslint-plugin-import": ">=2.22.1",
+    "eslint-plugin-jest": ">=24.3.2",
+    "eslint-plugin-node": ">=11.1.0",
+    "eslint-plugin-prettier": "3.3.1",
+    "eslint-plugin-promise": ">=4.3.1",
+    "eslint-plugin-standard": ">=4.1.0",
+    "eslint-plugin-vue": "^7.7.0",
+    "nodemon": "^2.0.7",
+    "prettier": "^2.2.1"
+  }
+}
